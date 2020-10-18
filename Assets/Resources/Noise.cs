@@ -13,7 +13,7 @@ public class Noise : MonoBehaviour
 	}
 	public float Last {
 		get {
-			return points[points.Count - 1];
+			return points[points.Count - 1].x;
 		}
 	}
 
@@ -23,7 +23,7 @@ public class Noise : MonoBehaviour
 	}
 
 	// get y value from a given x position
-	public float GetYFromX(float x) {
+	public float GetValue(float x) {
 		Vector2 start,end = points[0];
 		for(int i = 0 ; i < points.Count; i++) {
 			if (x == points[i].x) {
@@ -37,7 +37,7 @@ public class Noise : MonoBehaviour
 		}
 
 		float y_max = end.y - start.y;
-		float y_diff = Mathf.Sin((x - start.x) * Mathf.PI / (end.x - start.x) - Mathf.PI / 2) * (y_max) / 2 + y_max / 2;
+		float y_diff = Mathf.Sin((x - start.x) * Mathf.PI / (end.x - start.x) - Mathf.PI / 2) * y_max / 2 + y_max / 2;
 
 		return start.y + y_diff;
 	}
@@ -45,7 +45,15 @@ public class Noise : MonoBehaviour
 	static public Noise CreatePerlin(float min_x, float max_x, float max_y, float freq) {
 		List<Vector2> tmp = new List<Vector2>(freq + 1);
 		for (int i = 0; i <= freq; i++){
-			tmp.Add(new Vector2(min_x + (max_x - min_x) / freq * i), Math.Random(0, max_y));
+			tmp.Add(new Vector2(min_x + (max_x - min_x) / freq * i), Mathf.Random(0, max_y));
+		}
+		return new Noise(tmp);
+	}
+
+	static public Noise Import(List<Transform> p) {
+		var tmp = new List<Vector2>(p.Count);
+		foreach (var pt in p) {
+			tmp.Add(point.position);
 		}
 		return new Noise(tmp);
 	}
