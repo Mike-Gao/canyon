@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Noise : MonoBehaviour
+public class Noise
 {
 
 	List<Vector2> points;
@@ -24,12 +24,13 @@ public class Noise : MonoBehaviour
 
 	// get y value from a given x position
 	public float GetValue(float x) {
-		Vector2 start,end = points[0];
+		Vector2 start = points[0];
+		Vector2 end = points[0];
 		for(int i = 0 ; i < points.Count; i++) {
 			if (x == points[i].x) {
 				return points[i].y;
 			}
-			else if (x > points[i].x) {
+			else if (x < points[i].x) {
 				end = points[i];
 				break;
 			}
@@ -42,32 +43,20 @@ public class Noise : MonoBehaviour
 		return start.y + y_diff;
 	}
 
-	static public Noise CreatePerlin(float min_x, float max_x, float max_y, float freq) {
+	static public Noise CreatePerlin(float min_x, float max_x, float max_y, int freq) {
 		List<Vector2> tmp = new List<Vector2>(freq + 1);
 		for (int i = 0; i <= freq; i++){
-			tmp.Add(new Vector2(min_x + (max_x - min_x) / freq * i), Mathf.Random(0, max_y));
+			tmp.Add(new Vector2(min_x + (max_x - min_x) / freq * i, Random.Range(0f, max_y)));
 		}
 		return new Noise(tmp);
 	}
 
-	static public Noise Import(List<Transform> p) {
-		var tmp = new List<Vector2>(p.Count);
-		foreach (var pt in p) {
-			tmp.Add(point.position);
+	static public Noise Import(Transform p) {
+		var tmp = new List<Vector2>(p.childCount);
+		foreach (Transform pt in p) {
+			tmp.Add(pt.position);
 		}
 		return new Noise(tmp);
 	}
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

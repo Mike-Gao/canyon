@@ -7,10 +7,11 @@ using UnityEngine.UI;
 public class Manager : MonoBehaviour
 {
     public GameObject line;                             // In scene line. 
-    public Color landColor,waterColor;
+    public Color landColor;
+    public Color waterColor;
 
-	public List<Transform> land = new List<Transform>();
-	public List<Transform> water = new List<Transform>();
+    public Transform land;
+    public Transform water;
 
 	public float lineWidth = 1;
 
@@ -29,7 +30,7 @@ public class Manager : MonoBehaviour
 
     }
 
-    void DrawLine(List<Transform> t, Color c)
+    void DrawLine(Transform t, Color c)
     {
     	var baseLayer = Noise.Import(t);
     	var layers = new List<Noise> {baseLayer};
