@@ -1965,7 +1965,7 @@ PrefabInstance:
     - target: {fileID: 241910834596717280, guid: 7f7c1f69d6864ea42951cc8959bf2269,
         type: 3}
       propertyPath: m_Name
-      value: UsedForText
+      value: MuzzleVelocity
       objectReference: {fileID: 0}
     - target: {fileID: 241910834596717284, guid: 7f7c1f69d6864ea42951cc8959bf2269,
         type: 3}

@@ -9,12 +9,23 @@ public class Manager : MonoBehaviour
     public GameObject line;                             // In scene line. 
     public Color landColor;
     public Color waterColor;
-
+    public Text bulletVelocity;
+    public GameObject bullet;
     public Transform land;
     public Transform water;
+    public Cannon left;
+    public Cannon right;
 
+    public Cannon selected
+    {
+        get { return isLeft ? left : right; }
+    }
 	public float lineWidth = 1;
+    public float deltaDeg = 60;
 
+    public bool isLeft = true;
+    public int initV = 1;
+    private float curV { get { return 2 + initV; } }
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +38,53 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            isLeft = !isLeft;
+        }
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            selected.SetAngle(deltaDeg * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            selected.SetAngle(-deltaDeg * Time.deltaTime);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (initV > 1)
+            {
+                initV--;
+                bulletVelocity.text = $"{initV}";
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (initV < 8)
+            {
+                initV++;
+                bulletVelocity.text = $"{initV}";
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Shoot();
+        }
 
+    }
+
+
+    void Shoot()
+    {
+        var props = Instantiate(bullet).GetComponent<PhysicsBody>();
+        props.SetVelocity(curV, selected.Angle);
+        if (!isLeft)
+        {
+            props.velocity.x = -props.velocity.x;
+        }
+        props.Position = selected.Position;
+        // add gravity
+        props.acc = PhysicsBody.g;
     }
 
     void DrawLine(Transform t, Color c)
