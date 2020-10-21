@@ -23,14 +23,16 @@ public class Manager : MonoBehaviour
 	public float lineWidth = 1;
     public float deltaDeg = 60;
 
+    public Vector3[] waterVertices;
+    public Vector3[] landVertices;
     public bool isLeft = true;
     public int initV = 1;
     private float curV { get { return 2 + initV; } }
     // Start is called before the first frame update
     void Start()
     {
-        DrawLine(land, landColor);
-        DrawLine(water, waterColor);
+        landVertices = DrawLine(land, landColor);
+        waterVertices = DrawLine(water, waterColor);
     }
 
 
@@ -87,7 +89,7 @@ public class Manager : MonoBehaviour
         obj.Acceleration = new Vector3(0, -4, 0);
     }
 
-    void DrawLine(Transform t, Color c)
+    Vector3[] DrawLine(Transform t, Color c)
     {
     	var baseLayer = Noise.Import(t);
     	var layers = new List<Noise> {baseLayer};
@@ -117,6 +119,6 @@ public class Manager : MonoBehaviour
         lineRenderer.endWidth = lineWidth;
         lineRenderer.startColor = c;
         lineRenderer.endColor = c;
-    	
+    	return points;
     }
 }
