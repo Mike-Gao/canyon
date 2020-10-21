@@ -76,15 +76,15 @@ public class Manager : MonoBehaviour
 
     void Shoot()
     {
-        var props = Instantiate(bullet).GetComponent<PhysicsBody>();
-        props.SetVelocity(curV, selected.Angle);
+        var obj = Instantiate(bullet).GetComponent<PhysicsBody>();
+        obj.SetVelocity(curV, selected.Angle);
         if (!isLeft)
         {
-            props.Velocity.x = -props.Velocity.x;
+            obj.Velocity.x = -obj.Velocity.x;
         }
-        props.Position = selected.Position;
+        obj.Position = selected.Position;
         // add gravity
-        props.Acceleration = PhysicsBody.gravity;
+        obj.Acceleration = new Vector3(0, -4, 0);
     }
 
     void DrawLine(Transform t, Color c)

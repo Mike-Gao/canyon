@@ -5,7 +5,7 @@ using UnityEngine;
 public class PhysicsBody : MonoBehaviour
 {
 	public Vector3 Velocity = new Vector3();
-	public Vector3 Acceleration = new Vector3();
+	public Vector3 Acceleration{get;set;}
 	public Vector3 Position
 	{
 		get {
@@ -17,8 +17,6 @@ public class PhysicsBody : MonoBehaviour
 	}
 	public Vector3 prevPosition = new Vector3();
 	float stationaryDuration = 0;
-
-	public static readonly Vector3 gravity = new Vector3(0, -4);
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +28,8 @@ public class PhysicsBody : MonoBehaviour
     {
     	prevPosition = Position;
     	Vector3 NewVelocity = Velocity + Acceleration * Time.deltaTime;
-		Position += ((Velocity + NewVelocity) * Time.deltaTime / 2);
+		Position += ((Velocity + NewVelocity) / 2 * Time.deltaTime);
+		Velocity = NewVelocity;
 		if (Vector3.Magnitude (Position - prevPosition) < 0.002)
 		{
 			stationaryDuration += Time.deltaTime;
