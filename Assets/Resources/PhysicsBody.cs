@@ -4,6 +4,21 @@ using UnityEngine;
 
 public class PhysicsBody : MonoBehaviour
 {
+	public Vector3 Velocity = new Vector3();
+	public Vector3 Acceleration = new Vector3();
+	public Vector3 Position
+	{
+		get {
+			return gameObject.transform.position;
+		}
+		set {
+			gameObject.transform.position = value;
+		}
+	}
+	public Vector3 prevPosition = new Vector3();
+	float stationaryDuration = 0;
+
+	public static readonly Vector3 gravity = new Vector3(0, -4);
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +28,25 @@ public class PhysicsBody : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    	prevPosition = Position;
+    	Vector3 NewVelocity = Velocity + Acceleration * Time.deltaTime;
+		Position += ((Velocity + NewVelocity) * Time.deltaTime / 2);
+		if (Vector3.Magnitude (Position - prevPosition) < 0.002)
+		{
+			stationaryDuration += Time.deltaTime;
+		} else {
+			stationaryDuration = 0;
+		}
+		if (Position.x > 10 || Position.x < -10 || Position.y > 10 || Position.y < -5 || stationaryDuration > 2.0)
+		{
+			Destroy(gameObject);
+		}
         
+    }
+
+    public void SetVelocity(float v, float d)
+    {
+        this.Velocity.x = Mathf.Cos(Mathf.Deg2Rad * d) * v;
+        this.Velocity.y = Mathf.Sin(Mathf.Deg2Rad * d) * v;
     }
 }

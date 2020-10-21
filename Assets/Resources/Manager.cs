@@ -80,11 +80,11 @@ public class Manager : MonoBehaviour
         props.SetVelocity(curV, selected.Angle);
         if (!isLeft)
         {
-            props.velocity.x = -props.velocity.x;
+            props.Velocity.x = -props.Velocity.x;
         }
         props.Position = selected.Position;
         // add gravity
-        props.acc = PhysicsBody.g;
+        props.Acceleration = PhysicsBody.gravity;
     }
 
     void DrawLine(Transform t, Color c)
