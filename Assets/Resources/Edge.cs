@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class Edge
 {
@@ -15,7 +16,7 @@ public class Edge
 	}
 	public bool Collides(PhysicsBody b)
 	{
-		return (HandleUtility.DistancePointToLineSegment(b.Position, vertex_1.Position, vertex_2.Position) < radius);
+		return (HandleUtility.DistancePointToLineSegment(b.Position, vertex_1.Position, vertex_2.Position) < 0.86f);
 	}
 	public void AddForce(Vector3 v)
 	{

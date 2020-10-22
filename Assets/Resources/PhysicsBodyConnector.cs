@@ -23,7 +23,7 @@ public class PhysicsBodyConnector : MonoBehaviour
     	}
         for(int i = 0; i < balloon_tail.Count; i++)
         {
-        	tail.Add(CreateEdge(balloon_tail[i - 1], balloon_tail[i], tail_length));
+        	tail.Add(ConnectPhysicsBody(balloon_tail[i - 1], balloon_tail[i], tail_length));
         }
     }
 
@@ -67,7 +67,7 @@ public class PhysicsBodyConnector : MonoBehaviour
     		{
     			if (body[j].Collides(pb))
     			{
-    				print("Balloon Destroyed: body hit")
+    				print("Balloon Destroyed: body hit");
     				Destroy(gameObject);
     			}
     		}
