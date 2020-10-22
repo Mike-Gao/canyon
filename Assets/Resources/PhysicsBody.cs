@@ -33,12 +33,14 @@ public class PhysicsBody : MonoBehaviour
 		Velocity = NewVelocity;
 		if (Vector3.Magnitude (Position - prevPosition) < 0.002)
 		{
+			// If an object is stationary for too long, we destroy it
 			stationaryDuration += Time.deltaTime;
 		} else {
 			stationaryDuration = 0;
 		}
 		if (Position.x > 10 || Position.x < -10 || Position.y > 15 || Position.y < -5 || ((stationaryDuration > 5.0) && (!balloonCharacteristics)))
 		{
+			// Destroy the object when it is out of bound
 			// print("Destroyed, Object OUT OF BOUND")
 			Destroy(gameObject);
 		}

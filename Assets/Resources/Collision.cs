@@ -34,6 +34,7 @@ public class Collision : MonoBehaviour
 
     	for (int i = 0; i < water.Length; i++)
     	{
+            // If it hits the water
     		if (Vector3.Distance(water[i], transform.position) < bulletRadius)
     		{
     			Destroy(gameObject);
@@ -79,6 +80,7 @@ public class Collision : MonoBehaviour
 
     }
 
+    // Using Linear Regression to find the vector of the terrain (used to calculate bounce)
     Vector3 Regression(Vector3[] vertex)
     {
     	var mean = new Vector3();
