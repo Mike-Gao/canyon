@@ -83,8 +83,8 @@ public class PhysicsBodyConnector : MonoBehaviour
     		length = l,
     	};
 
-    	var ret = Instantiate(line);
-        var lineRenderer = ret.GetComponent<LineRenderer>();
+    	GameObject ins = Instantiate(line);
+        LineRenderer lineRenderer = ins.GetComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
         lineRenderer.SetPositions(new Vector3[] {vertex_1.Position, vertex_2.Position});
         lineRenderer.startWidth = 0.04f;
