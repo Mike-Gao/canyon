@@ -12,8 +12,8 @@ public class PhysicsBodyConnector : MonoBehaviour
 	public GameObject line;
 
 
-	private readonly List<Edge> body = new List<Edge>();
-	private readonly List<Edge> tail = new List<Edge>();
+	public List<Edge> body = new List<Edge>();
+	public List<Edge> tail = new List<Edge>();
 
     // Start is called before the first frame update
     void Start()

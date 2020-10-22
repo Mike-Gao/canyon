@@ -10,6 +10,7 @@ public class Manager : MonoBehaviour
     public Color landColor;
     public Color waterColor;
     public Text bulletVelocity;
+    public Text windDirection;
     public GameObject bullet;
     public Transform land;
     public Transform water;
@@ -28,13 +29,32 @@ public class Manager : MonoBehaviour
     public bool isLeft = true;
     public int initV = 1;
     private float curV { get { return 2 + initV; } }
+
+    public float maxY = -5;
+    public float windDir = 0;
     // Start is called before the first frame update
     void Start()
     {
         landVertices = DrawLine(land, landColor);
         waterVertices = DrawLine(water, waterColor);
+        for(int i = 0; i < landVertices.Length; i++){
+            if (landVertices[i].y > maxY)
+            {
+                maxY = landVertices[i].y;
+            }
+        }
+        InvokeRepeating("updateWind",0,1.0f);
     }
 
+    void updateWind()
+    {
+        windDir = UnityEngine.Random.Range(-0.3f,0.3f);
+        if(windDir < 0){
+            windDirection.text = $"Wind Direction: left @ {Mathf.Abs(windDir)}";
+        } else {
+            windDirection.text = $"Wind Direction: right @ {Mathf.Abs(windDir)}";
+        }
+    }
 
 
     // Update is called once per frame
@@ -72,6 +92,18 @@ public class Manager : MonoBehaviour
         {
             Shoot();
         }
+        PhysicsBodyConnector[] balloons_above_the_mountain = FindObjectsOfType<PhysicsBodyConnector>();
+        for (int i = 0; i < balloons_above_the_mountain.Length; i++)
+        {
+            List<Edge> mountain_edges = balloons_above_the_mountain[i].body;
+            for (int j = 0; j < mountain_edges.Count; j++){
+                if(mountain_edges[j].vertex_1.Position.y > maxY)
+                {
+                    mountain_edges[j].AddForce(new Vector3(windDir,0f,0f));
+                }
+            }
+        }
+        
 
     }
 
