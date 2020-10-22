@@ -38,6 +38,7 @@ public class PhysicsBody : MonoBehaviour
 		}
 		if (Position.x > 10 || Position.x < -10 || Position.y > 15 || Position.y < -5 || stationaryDuration > 2.0)
 		{
+			print("Destroyed, Object OUT OF BOUND")
 			Destroy(gameObject);
 		}
         
