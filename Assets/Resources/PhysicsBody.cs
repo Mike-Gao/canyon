@@ -15,6 +15,7 @@ public class PhysicsBody : MonoBehaviour
 			gameObject.transform.position = value;
 		}
 	}
+	public bool balloonCharacteristics;
 	public Vector3 prevPosition = new Vector3();
 	float stationaryDuration = 0;
     // Start is called before the first frame update
@@ -36,10 +37,10 @@ public class PhysicsBody : MonoBehaviour
 		} else {
 			stationaryDuration = 0;
 		}
-		if (Position.x > 10 || Position.x < -10 || Position.y > 15 || Position.y < -5 || stationaryDuration > 2.0)
+		if (Position.x > 10 || Position.x < -10 || Position.y > 15 || Position.y < -5 || ((stationaryDuration > 5.0) && (!balloonCharacteristics)))
 		{
-			print("Destroyed, Object OUT OF BOUND");
-			// Destroy(gameObject);
+			// print("Destroyed, Object OUT OF BOUND")
+			Destroy(gameObject);
 		}
         
     }

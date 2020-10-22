@@ -21,9 +21,9 @@ public class PhysicsBodyConnector : MonoBehaviour
     	{
     		body.Add(ConnectPhysicsBody(vertex_1[i],vertex_2[i],length[i]));
     	}
-        for(int i = 0; i < balloon_tail.Count; i++)
+        for(int i = 0; i < balloon_tail.Count - 1; i++)
         {
-        	tail.Add(ConnectPhysicsBody(balloon_tail[i - 1], balloon_tail[i], tail_length));
+        	tail.Add(ConnectPhysicsBody(balloon_tail[i], balloon_tail[i + 1], tail_length));
         }
     }
 

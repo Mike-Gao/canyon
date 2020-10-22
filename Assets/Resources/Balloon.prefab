@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocity: {x: 0, y: 0, z: 0}
+  balloonCharacteristics: 1
   prevPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &7618966079448556920
 MonoBehaviour:
@@ -27,6 +28,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocity: {x: 0, y: 0, z: 0}
+  balloonCharacteristics: 1
   prevPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &8197261064775273124
 MonoBehaviour:
@@ -41,6 +43,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocity: {x: 0, y: 0, z: 0}
+  balloonCharacteristics: 1
   prevPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &3517243763307694855
 MonoBehaviour:
@@ -55,6 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocity: {x: 0, y: 0, z: 0}
+  balloonCharacteristics: 1
   prevPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &7473608163748530923
 MonoBehaviour:
@@ -69,6 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocity: {x: 0, y: 0, z: 0}
+  balloonCharacteristics: 1
   prevPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &5115799075205593578
 GameObject:
@@ -130,6 +135,8 @@ MonoBehaviour:
   - {fileID: 6731914108990552139}
   - {fileID: 4322231663820820674}
   - {fileID: 7618966079448556920}
+  - {fileID: 6209210268922265374}
+  - {fileID: 8197261064775273124}
   vertex_2:
   - {fileID: 6209210268922265374}
   - {fileID: 8197261064775273124}
@@ -137,7 +144,18 @@ MonoBehaviour:
   - {fileID: 4322231663820820674}
   - {fileID: 7618966079448556920}
   - {fileID: 6761940880732689255}
+  - {fileID: 4322231663820820674}
+  - {fileID: 7618966079448556920}
+  balloon_tail:
+  - {fileID: 6731914108990552139}
+  - {fileID: 1719943779094398699}
+  - {fileID: 7473608163748530923}
+  - {fileID: 4178152163102507131}
+  - {fileID: 3517243763307694855}
+  tail_length: 1
   length:
+  - 0.5
+  - 0.5
   - 0.5
   - 0.5
   - 0.5
@@ -158,6 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocity: {x: 0, y: 0, z: 0}
+  balloonCharacteristics: 1
   prevPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &6209210268922265374
 MonoBehaviour:
@@ -172,6 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocity: {x: 0, y: 0, z: 0}
+  balloonCharacteristics: 1
   prevPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &4322231663820820674
 MonoBehaviour:
@@ -186,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocity: {x: 0, y: 0, z: 0}
+  balloonCharacteristics: 1
   prevPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &6761940880732689255
 MonoBehaviour:
@@ -200,6 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocity: {x: 0, y: 5, z: 0}
+  balloonCharacteristics: 1
   prevPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &4178152163102507131
 MonoBehaviour:
@@ -214,6 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Velocity: {x: 0, y: 0, z: 0}
+  balloonCharacteristics: 1
   prevPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &1005916922143781433
 PrefabInstance:
