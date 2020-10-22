@@ -13,5 +13,14 @@ public class Edge
 		line.SetPosition(0, vertex_1.Position);
 		line.SetPosition(1, vertex_2.Position);
 	}
+	public bool Collides(PhysicsBody b)
+	{
+		return (HandleUtility.DistancePointToLineSegment(b.Position, vertex_1.Position, vertex_2.Position) < radius);
+	}
+	public void AddForce(Vector3 v)
+	{
+		vertex_1.Position += v * Time.deltaTime * 5f;
+		vertex_2.Position += v * Time.deltaTime * 5f;
+	}
     
 }

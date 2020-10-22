@@ -6,43 +6,70 @@ public class PhysicsBodyConnector : MonoBehaviour
 {
 	public List<PhysicsBody> vertex_1;
 	public List<PhysicsBody> vertex_2;
+	public List<PhysicsBody> balloon_tail;
+	public float tail_length;
 	public List<float> length;
 	public GameObject line;
 
-	private readonly List<Edge> edges = new List<Edge>();
+	private readonly List<Edge> body = new List<Edge>();
+	private readonly List<Edge> tail = new List<Edge>();
 
     // Start is called before the first frame update
     void Start()
     {
     	for(int i = 0; i < vertex_1.Count; i++)
     	{
-    		edges.Add(ConnectPhysicsBody(vertex_1[i],vertex_2[i],length[i]));
+    		body.Add(ConnectPhysicsBody(vertex_1[i],vertex_2[i],length[i]));
     	}
-        
+        for(int i = 0; i < balloon_tail.Count; i++)
+        {
+        	tail.Add(CreateEdge(balloon_tail[i - 1], balloon_tail[i], tail_length));
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-    	for(int i = 0; i < edges.Count; i++)
+    	for(int i = 0; i < body.Count; i++)
     	{
-    		Vector3 v1_to_v2 = edges[i].vertex_2.Position - edges[i].vertex_1.Position;
+    		Vector3 v1_to_v2 = body[i].vertex_2.Position - body[i].vertex_1.Position;
     		float l = v1_to_v2.magnitude;
-    		float diff = l - edges[i].length;
+    		float diff = l - body[i].length;
     		v1_to_v2.Normalize();
-    		edges[i].vertex_1.Position += v1_to_v2 * diff * 0.5f;
-    		edges[i].vertex_2.Position -= v1_to_v2 * diff * 0.5f;
-    		edges[i].UpdatePosition();
+    		body[i].vertex_1.Position += v1_to_v2 * diff * 0.5f;
+    		body[i].vertex_2.Position -= v1_to_v2 * diff * 0.5f;
+    		body[i].UpdatePosition();
+    	}
+
+    	for(int i = 0; i < tail.Count; i++)
+    	{
+    		Vector3 v1_to_v2 = tail[i].vertex_2.Position - tail[i].vertex_1.Position;
+    		float l = v1_to_v2.magnitude;
+    		float diff = l - body[i].length;
+    		v1_to_v2.Normalize();
+    		tail[i].vertex_1.Position += v1_to_v2 * diff * 0.5f;
+    		tail[i].vertex_2.Position -= v1_to_v2 * diff * 0.5f;
+    		tail[i].UpdatePosition();
     	}
 
     	Collision[] bullets = FindObjectsOfType<Collision>();
     	for (int i = 0; i < bullets.Length; i++)
     	{
     		PhysicsBody pb = bullets[i].gameObject.GetComponent<PhysicsBody>();
-    		if(Vector3.Magnitude(transform.position - pb.Position) > 2)
+    		for(int j = 0; j < tail.Count; j++) {
+    			if (tail[j].Collides(pb))
+    			{
+    				tail[j].AddForce(pb.Velocity);
+    			}
+    		}
+
+    		for(int j = 0; j < body.Count; j++)
     		{
-    			// do not compute when its far away
-    			break;
+    			if (body[j].Collides(pb))
+    			{
+    				print("Balloon Destroyed: body hit")
+    				Destroy(gameObject);
+    			}
     		}
     	}
     }  
