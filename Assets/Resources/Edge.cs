@@ -16,7 +16,7 @@ public class Edge
 	}
 	public bool Collides(PhysicsBody b)
 	{
-		return (HandleUtility.DistancePointToLineSegment(b.Position, vertex_1.Position, vertex_2.Position) < 0.86f);
+		return (HandleUtility.DistancePointToLineSegment(b.Position, vertex_1.Position, vertex_2.Position) < 0.4f);
 	}
 	public void AddForce(Vector3 v)
 	{

@@ -11,12 +11,14 @@ public class PhysicsBodyConnector : MonoBehaviour
 	public List<float> length;
 	public GameObject line;
 
+
 	private readonly List<Edge> body = new List<Edge>();
 	private readonly List<Edge> tail = new List<Edge>();
 
     // Start is called before the first frame update
     void Start()
     {
+
     	for(int i = 0; i < vertex_1.Count; i++)
     	{
     		body.Add(ConnectPhysicsBody(vertex_1[i],vertex_2[i],length[i]));
@@ -67,8 +69,8 @@ public class PhysicsBodyConnector : MonoBehaviour
     		{
     			if (body[j].Collides(pb))
     			{
-    				print("Balloon Destroyed: body hit");
-    				Destroy(gameObject);
+					// print("Balloon Destroyed: body hit");
+    				Destroy(this.gameObject);
     			}
     		}
     	}
@@ -84,6 +86,7 @@ public class PhysicsBodyConnector : MonoBehaviour
     	};
 
     	GameObject ins = Instantiate(line);
+    	ins.transform.parent = gameObject.transform;
         LineRenderer lineRenderer = ins.GetComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
         lineRenderer.SetPositions(new Vector3[] {vertex_1.Position, vertex_2.Position});
@@ -94,4 +97,6 @@ public class PhysicsBodyConnector : MonoBehaviour
         e.line = lineRenderer;
         return e;
     }
+
+
 }

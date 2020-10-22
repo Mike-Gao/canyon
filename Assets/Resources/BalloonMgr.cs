@@ -10,7 +10,7 @@ public class BalloonMgr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnBalloon",0,2.0f);
+        InvokeRepeating("SpawnBalloon",0,4.0f);
     }
 
     void SpawnBalloon()
