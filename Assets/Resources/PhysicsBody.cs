@@ -36,7 +36,7 @@ public class PhysicsBody : MonoBehaviour
 		} else {
 			stationaryDuration = 0;
 		}
-		if (Position.x > 10 || Position.x < -10 || Position.y > 10 || Position.y < -5 || stationaryDuration > 2.0)
+		if (Position.x > 10 || Position.x < -10 || Position.y > 15 || Position.y < -5 || stationaryDuration > 2.0)
 		{
 			Destroy(gameObject);
 		}

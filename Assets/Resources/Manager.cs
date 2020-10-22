@@ -57,7 +57,7 @@ public class Manager : MonoBehaviour
             if (initV > 1)
             {
                 initV--;
-                bulletVelocity.text = $"{initV}";
+                bulletVelocity.text = $"Muzzle Velocity: {initV}";
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -65,7 +65,7 @@ public class Manager : MonoBehaviour
             if (initV < 8)
             {
                 initV++;
-                bulletVelocity.text = $"{initV}";
+                bulletVelocity.text = $"Muzzle Velocity: {initV}";
             }
         }
         if (Input.GetKeyDown(KeyCode.Space))
